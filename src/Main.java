@@ -1,5 +1,6 @@
 public class Main {
 
+
     public static void main(String[] args) {
         Car ladaGranta = new Car("Lada", "Granta", 1.7, "yellow", 2015, "Russia");
         Car audiA8 = new Car("Audi", "A8", 3, "black", 2020, "Germany");
