@@ -9,7 +9,7 @@ public class Car {
 
 
     Car(String brand, String model, double engineVolume, String color, int year, String country) {
-        this.brand = "default";
+        this.brand = brand;
         this.model = model;
         this.engineVolume = engineVolume;
         this.color = color;
