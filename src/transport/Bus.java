@@ -1,14 +1,9 @@
 package transport;
 
-public class Bus extends Transport {
-
-    public Bus(String brand, String model, int year, String country, String color, int maxSpeed) {
-        super(brand, model, year, country, color, maxSpeed);
+public class Bus extends Transport <DriverD>{
+    public Bus(String brand, String model, double engineVolume,DriverD driverD) {
+        super(brand, model, engineVolume,driverD );
     }
 
-    @Override
-    public String toString() {
-        return getBrand()+' '+getModel()+' '+getYear()+' '+getCountry()+' '+getColor()+' '+getMaxSpeed();
 
-    }
 }

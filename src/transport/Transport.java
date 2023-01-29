@@ -1,35 +1,23 @@
 package transport;
 
-class Transport  {
+
+public abstract class  Transport <T extends Driver> implements Competing  {
     final private String brand;
     final private String model;
-    final private int year;
-    final private String country;
-    private String color;
-    private int maxSpeed;
+    private T driver;
 
-    public Transport(String brand, String model, int year, String country, String color, int maxSpeed) {
-        this.brand = checkingDataStr(brand);
-        this.model = checkingDataStr(model);
-        this.year = checkingDataYear(year);
-        this.country = checkingDataStr(country);
-        this.color = checkingDataStr(color);
-        this.maxSpeed = checkingDataMaxSpeed(maxSpeed);
+    private double engineVolume;
+
+    public Transport(String brand, String model, double engineVolume,T driver) {
+        this.brand = brand==null|| brand.isBlank()? "default": brand;
+        this.model = model== null|| model.isBlank()?"default":model;
+        this.engineVolume = engineVolume <= 0 ? 1 : engineVolume;
+        setDriver(driver);
+
+
+
     }
 
-
-
-    public String checkingDataStr(String a) {
-        return a==null||a.isBlank()?"default": a;
-    }
-
-    public int checkingDataYear(int a) {
-        return a<=0? 2000:a;
-    }
-
-    public int checkingDataMaxSpeed(int a) {
-        return a<=0? 60:a;
-    }
 
     public String getBrand() {
         return brand;
@@ -39,32 +27,63 @@ class Transport  {
         return model;
     }
 
-    public int getYear() {
-        return year;
+    public double getEngineVolume() {
+        return engineVolume;
     }
 
-    public String getCountry() {
-        return country;
+    public void setEngineVolume(double engineVolume) {
+        this.engineVolume = engineVolume;
     }
 
-    public String getColor() {
-        return color;
+    public void setDriver(T driver) {
+        this.driver = driver;
     }
 
-    public int getMaxSpeed() {
-        return maxSpeed;
+    public void transportStart() {
+        System.out.println("Стартовал "+brand+' '+ model);
     }
 
-    public void setColor(String color) {
-        this.color = checkingDataStr(color);
+    public void TransportFinish() {
+        System.out.println("Финишировал"+ brand+' '+ model);
     }
 
-    public void setMaxSpeed(int maxSpeed) {
-        this.maxSpeed = checkingDataMaxSpeed(maxSpeed);
+    public void pitStop(){
+
+        System.out.println("Пит-стоп " + brand + ' ' + model + "длился " + randomInt(14, 20));
+
     }
+
+    public  void bestLapTime(){
+
+        System.out.println("Лучшее время круга " + brand + ' ' + model + ' ' + randomInt(60, 80));
+    }
+
+    public void maxSpeed(){
+        System.out.println("Максимальная скорость "+ brand+' '+model+' '+ randomInt(70,100));
+    }
+
 
     @Override
     public String toString() {
-        return brand +' '+ model + ' ' + year +' '+ country + ' ' + color + ' ' + maxSpeed;
+        return brand +' '+ model +' '+ engineVolume;
+
     }
+
+    public void allData() {
+        System.out.println( "\n"+toString());
+        pitStop();
+        bestLapTime();
+        maxSpeed();
+    }
+
+    private static int randomInt(int min, int max) {
+
+
+        return (int)(min + (max-min) * Math.random());
+    }
+
+    public void printDriverCar() {
+        System.out.println("водитель " +driver.getFullName()+ " управляет автомобилем "+this.brand+' '+ this.model +" и будет участвовать в заезде");
+    }
+
 }
